@@ -1,10 +1,8 @@
-Here’s a clean and catchy **README** intro you can use 👇
 
----
 
 # 🌸 Parkavi S — AI & Data Science Student
 
-Hi there! I’m **Parkavi S**, a passionate **AI & Data Science engineer in the making** who loves blending **creativity with code**. I specialize in building intelligent, data-driven solutions using **Python, Machine Learning, and Web Technologies**.
+Hi there! I’m **Parkavi S**, a passionate **AI & Data Science engineer in the making** who loves blending **creativity with code**. I specialize in building intelligent, data-driven solutions using **Java, Salesforce, Python, Machine Learning, and Web Technologies**.
 
 💡 My work reflects both **technical precision** and **aesthetic design sense** — from real-time computer vision systems to full-stack AI dashboards.
 
