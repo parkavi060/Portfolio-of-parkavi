@@ -3,136 +3,429 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Parkavi S — Portfolio</title>
-  <!-- Favicon: replace /favicon.ico with your file if you want a custom icon -->
+  <title>Parkavi S — Portfolio | AI&DS Engineer</title>
+  <meta name="description" content="Portfolio of Parkavi S, Aspiring Software Engineer specializing in AI & Data Science, based in Palani, TN." />
   <link rel="icon" href="favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
   <style>
-    :root{
-      --bg:linear-gradient(180deg,#f3e7ff 0%,#e5ccff 100%);
-      --card-bg:#ffffffcc;
-      --accent:#7b2ff7;
-      --accent2:#f107a3;
-      --muted:#5f5b7a;
-      --shadow:0 6px 25px rgba(123,47,247,0.15);
-      font-family:'Poppins',sans-serif;
+    :root {
+      --bg:       #0a0f1e;
+      --bg-card:  #111827;
+      --bg-card2: #1a2235;
+      --accent:   #00d4aa;
+      --accent2:  #3b82f6;
+      --danger:   #f472b6;
+      --text-1:   #f1f5f9;
+      --text-2:   #94a3b8;
+      --text-3:   #64748b;
+      --border:   rgba(0,212,170,0.18);
+      --border2:  rgba(59,130,246,0.18);
+      --shadow:   0 4px 32px rgba(0,212,170,0.08);
+      --radius:   14px;
+      --ff:       'Inter', sans-serif;
+      --ff-code:  'Fira Code', monospace;
     }
-    body{margin:0;background:var(--bg);color:#2b2b2b;display:flex;flex-direction:column;align-items:center;padding:30px;}
-    /* profile photo (you can replace the src with your own file) */
-    img.photo{width:140px;height:140px;border-radius:50%;object-fit:cover;box-shadow:0 4px 20px rgba(123,47,247,0.3);border:4px solid #fff;margin-bottom:20px;}
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text-1); font-family: var(--ff); line-height: 1.7; }
 
-    h1{font-size:30px;margin:10px 0;color:#4b0082;text-align:center;}
-    h2{font-size:20px;color:#5c3b91;margin-bottom:10px;display:flex;align-items:center;gap:10px}
-    .emoji{font-size:20px;display:inline-block;width:28px;text-align:center}
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      backdrop-filter: blur(18px); background: rgba(10,15,30,0.85);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 6vw;
+    }
+    .nav-logo { font-size: 1.1rem; font-weight: 700; color: var(--accent); letter-spacing: 0.5px; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { color: var(--text-2); text-decoration: none; font-size: .88rem; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--accent); }
+    #nav-toggle { display: none; background: none; border: none; color: var(--text-1); font-size: 1.5rem; cursor: pointer; }
 
-    p{color:var(--muted);font-size:15px;text-align:center;max-width:700px;}
-    .btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:14px 0 28px;}
-    a.btn{padding:10px 18px;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;font-weight:600;text-decoration:none;box-shadow:var(--shadow);}
+    /* ── HERO ── */
+    #hero {
+      min-height: 92vh; display: flex; align-items: center; justify-content: center;
+      padding: 60px 6vw; position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 700px 500px at 70% 40%, rgba(0,212,170,0.07) 0%, transparent 70%),
+                  radial-gradient(ellipse 600px 400px at 20% 70%, rgba(59,130,246,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner { display: flex; align-items: center; gap: 64px; max-width: 1100px; width: 100%; }
+    .hero-photo {
+      flex-shrink: 0; width: 160px; height: 160px; border-radius: 50%;
+      object-fit: cover; border: 3px solid var(--accent);
+      box-shadow: 0 0 0 8px rgba(0,212,170,0.1), 0 0 40px rgba(0,212,170,0.2);
+    }
+    .hero-text { flex: 1; }
+    .hero-tag { font-family: var(--ff-code); font-size: .8rem; color: var(--accent); letter-spacing: 1px; margin-bottom: 10px; display: block; }
+    .hero-name { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 700; line-height: 1.15; color: var(--text-1); }
+    .hero-name span { color: var(--accent); }
+    .hero-role { font-size: 1.1rem; color: var(--text-2); margin: 12px 0 6px; }
+    .hero-location { font-size: .88rem; color: var(--text-3); margin-bottom: 28px; }
+    .hero-location::before { content: '📍 '; }
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      padding: 10px 20px; border-radius: 8px; font-size: .88rem; font-weight: 600;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,212,170,0.25); }
+    .btn-primary { background: var(--accent); color: #0a0f1e; }
+    .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text-2); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 
-    .card{background:var(--card-bg);backdrop-filter:blur(8px);border-radius:16px;box-shadow:var(--shadow);padding:24px;margin-bottom:22px;max-width:800px;width:90%;}
-    ul{color:#4d4665;padding-left:20px;margin:8px 0;}
-    li{margin-bottom:6px}
+    /* ── SECTIONS ── */
+    section { padding: 80px 6vw; max-width: 1200px; margin: 0 auto; }
+    .section-label { font-family: var(--ff-code); font-size: .78rem; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+    .section-title { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: var(--text-1); margin-bottom: 40px; }
+    .section-title span { color: var(--accent); }
+    .divider { width: 48px; height: 3px; background: var(--accent); border-radius: 2px; margin: 10px 0 36px; }
 
-    footer{margin-top:30px;font-size:14px;color:#6b5b95;text-align:center;}
+    /* ── CARD ── */
+    .card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px 32px;
+      box-shadow: var(--shadow); transition: border-color .3s, transform .3s;
+    }
+    .card:hover { border-color: rgba(0,212,170,0.45); transform: translateY(-3px); }
+
+    /* ── OBJECTIVE ── */
+    #objective .card p { color: var(--text-2); font-size: 1rem; line-height: 1.9; }
+
+    /* ── INTERNSHIP ── */
+    .intern-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+    .intern-title { font-size: 1.1rem; font-weight: 700; color: var(--text-1); }
+    .intern-company { font-size: .92rem; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+    .badge-date { font-family: var(--ff-code); font-size: .78rem; padding: 4px 12px; border-radius: 20px; background: rgba(0,212,170,0.1); color: var(--accent); border: 1px solid var(--border); white-space: nowrap; }
+    .intern-list, .proj-list { list-style: none; padding: 0; margin-top: 10px; }
+    .intern-list li, .proj-list li { color: var(--text-2); padding: 5px 0 5px 20px; position: relative; font-size: .93rem; }
+    .intern-list li::before, .proj-list li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: .8rem; top: 7px; }
+
+    /* ── PROJECTS ── */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .proj-card { background: var(--bg-card); border: 1px solid var(--border2); border-radius: var(--radius); padding: 28px; transition: all .3s; }
+    .proj-card:hover { border-color: rgba(59,130,246,0.5); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(59,130,246,0.12); }
+    .proj-num { font-family: var(--ff-code); font-size: .75rem; color: var(--accent2); letter-spacing: 1px; margin-bottom: 10px; display: block; }
+    .proj-name { font-size: 1.05rem; font-weight: 700; color: var(--text-1); margin-bottom: 6px; }
+    .proj-date { font-size: .78rem; color: var(--text-3); margin-bottom: 14px; font-family: var(--ff-code); }
+    .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .tech-tag { font-size: .72rem; padding: 3px 10px; border-radius: 20px; background: rgba(59,130,246,0.1); color: var(--accent2); border: 1px solid rgba(59,130,246,0.2); font-family: var(--ff-code); }
+
+    /* ── SKILLS ── */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    .skill-block { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 28px; }
+    .skill-block h3 { font-size: .92rem; font-weight: 700; color: var(--accent); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
+    .skill-item { margin-bottom: 8px; }
+    .skill-item strong { color: var(--text-1); font-size: .88rem; }
+    .skill-item span { color: var(--text-2); font-size: .88rem; }
+    .soft-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+    .chip { padding: 6px 16px; border-radius: 20px; background: rgba(0,212,170,0.08); border: 1px solid var(--border); color: var(--text-2); font-size: .84rem; }
+
+    /* ── EDUCATION ── */
+    .edu-timeline { display: flex; flex-direction: column; gap: 24px; }
+    .edu-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 28px; border-left: 3px solid var(--accent); }
+    .edu-inst { font-size: 1rem; font-weight: 700; color: var(--text-1); margin-bottom: 4px; }
+    .edu-degree { color: var(--accent); font-size: .9rem; font-weight: 600; margin-bottom: 4px; }
+    .edu-meta { color: var(--text-3); font-size: .84rem; font-family: var(--ff-code); }
+
+    /* ── CERTIFICATIONS ── */
+    .cert-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+    .cert-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; display: flex; align-items: flex-start; gap: 14px; }
+    .cert-icon { font-size: 1.4rem; flex-shrink: 0; }
+    .cert-name { font-size: .92rem; font-weight: 600; color: var(--text-1); margin-bottom: 4px; }
+    .cert-meta { font-size: .8rem; color: var(--text-3); font-family: var(--ff-code); }
+
+    /* ── EXTRA ── */
+    .extra-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 32px; display: flex; align-items: center; gap: 24px; }
+    .extra-icon { font-size: 2.5rem; flex-shrink: 0; }
+    .extra-role { font-size: 1rem; font-weight: 700; color: var(--text-1); margin-bottom: 4px; }
+    .extra-org { color: var(--accent); font-size: .9rem; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--bg-card); border-top: 1px solid var(--border); text-align: center; padding: 28px 20px; color: var(--text-3); font-size: .84rem; }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ── ANIMATIONS ── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero-inner { flex-direction: column; text-align: center; gap: 32px; }
+      .btn-row { justify-content: center; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 60px; right: 0; left: 0; background: var(--bg-card); padding: 20px; gap: 16px; border-bottom: 1px solid var(--border); }
+      .nav-links.open { display: flex; }
+      #nav-toggle { display: block; }
+      .intern-header { flex-direction: column; }
+      .extra-card { flex-direction: column; text-align: center; }
+    }
   </style>
 </head>
 <body>
-  <!-- Replace Photo.jpg with your actual profile photo file name if needed -->
-  <img src="Photo.jpg" alt="Profile Photo" class="photo"/>
-  <h1>Parkavi S</h1>
-  <p>B.Tech (AI & DS) • Dr. Mahalingam College of Engineering & Technology • CGPA: 8.6</p>
 
-  <div class="btns">
-    <a href="mailto:parkavisaravanan06@gmail.com" class="btn">Email</a>
-    <a href="https://www.linkedin.com/in/parkavis62005" class="btn">LinkedIn</a>
-    <a href="https://github.com/parkavi060" class="btn">GitHub</a>
-    <a href="tel:+918015787019" class="btn">Call</a>
-  </div>
-
-  <div class="card">
-    <h2><span class="emoji">💡</span>Objective</h2>
-    <p>To develop innovative AI-driven applications that bridge data and decision-making, while building full-stack systems that emphasize reliability, creativity, and intelligent automation.</p>
-  </div>
-
-  <div class="card">
-    <h2><span class="emoji">🧰</span>Projects</h2>
-    <ul>
-      <li><strong>AI-CRM Insights Generator</strong> — Built an AI-driven CRM analytics tool using Flask, Gemini API & ML models for churn prediction, improving decision accuracy by 35%.</li>
-      <li><strong>Driver Drowsiness Detector System</strong> — Real-time detection of driver fatigue using OpenCV & facial landmarks; reduced risks by 40% via automated alerts.</li>
-      <li><strong>Aadhaar & Smart Card Verification</strong> — Designed an AI verifier with OCR & image matching to authenticate identity proofs efficiently.</li>
-    </ul>
-  </div>
-
-  <div class="card" style="text-align:left;">
-  <h2><span class="emoji">💼</span>Internship</h2>
-    <p style="margin:6px 0 4px;font-weight:500;color:#6d5799;">June – July 2024</p>
-    <hr style="border:0;height:1px;background:rgba(123,47,247,0.15);margin:10px 0;"> 
-    <ul>
-    <li style="margin:0;color:#5f5b7a;line-height:1.6;">Worked as a E-Commerce web developer at CIBIE.</li>
-    <li style="margin:0;color:#5f5b7a;line-height:1.6;">
-      Created an intuitive website interface with drag-and-drop customization.</li>
-      <li>Gained hands-on experience with platforms including WordPress and WooCommerce.</li>
-     
-   
- </ul>
-</div>
-
-
-  <div class="card">
-    <h3 style="color:#5c3b91;margin-bottom:8px;">Technical Skills</h3>
-  <ul>
-    <li><strong>Languages:</strong> Java, SQL</li>
-    <li><strong>Salesforce:</strong> Apex, SOQL, SOSL, Lightning App Builder</li>
-    <li><strong>Frontend:</strong> HTML, CSS</li>
-    <li><strong>Version Control:</strong> Git & GitHub</li>
-    <li><strong>Tools & Technologies:</strong> Power BI, MS Excel, MySQL</li>
+<!-- NAV -->
+<nav id="navbar">
+  <span class="nav-logo">&lt;Parkavi /&gt;</span>
+  <button id="nav-toggle" aria-label="Toggle menu">&#9776;</button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#objective">Objective</a></li>
+    <li><a href="#internship">Internship</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#extra">Extra</a></li>
   </ul>
+</nav>
 
-  <h3 style="color:#5c3b91;margin-top:14px;margin-bottom:8px;">Soft Skills</h3>
-  <ul>
-    <li>Communication</li>
-    <li>Teamwork</li>
-    <li>Adaptability</li>
-    <li>Problem Solving</li>
-    <li>Time Management</li>
-  </ul>
-</div>
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-inner">
+    <img src="Photo.jpg" alt="Parkavi S profile photo" class="hero-photo" />
+    <div class="hero-text">
+      <span class="hero-tag">// aspiring-software-engineer</span>
+      <h1 class="hero-name">Parkavi <span>S</span></h1>
+      <p class="hero-role">B.Tech in AI &amp; Data Science &nbsp;·&nbsp; CGPA 8.6</p>
+      <p class="hero-location">Palani, Tamil Nadu, India</p>
+      <div class="btn-row">
+        <a href="mailto:parkavisaravanan06@gmail.com" class="btn btn-primary" id="btn-email">✉ Email</a>
+        <a href="https://www.linkedin.com/in/parkavis62005" target="_blank" rel="noopener" class="btn btn-outline" id="btn-linkedin">LinkedIn</a>
+        <a href="https://github.com/parkavi060" target="_blank" rel="noopener" class="btn btn-outline" id="btn-github">GitHub</a>
+        <a href="tel:+918015787019" class="btn btn-outline" id="btn-phone">📞 Call</a>
+      </div>
+    </div>
   </div>
-
-<div class="card" style="text-align:left;">
-  <h2><span class="emoji">🎓</span>Education</h2>
-  
-    <p style="margin:0 0 10px;line-height:1.6;color:#4b0082;">
-      <strong>Dr. Mahalingam College of Engineering & Technology</strong><br>
-      B.Tech in Artificial Intelligence & Data Science (2022–2026)<br>
-      <span style="color:#6d5799;">CGPA: 8.6</span>
-    </p>
-    <hr style="border:0;height:1px;background:rgba(123,47,247,0.15);margin:10px 0;">
-    <p style="margin:0;line-height:1.6;color:#4b0082;">
-      <strong>Swamy Matriculation Hr. Sec. School</strong><br>
-      <span style="color:#6d5799;">HSC: 85.1%    SSLC: 89.8%</span>
-    </p>
-  
 </div>
 
-  <div class="card">
-    <h2><span class="emoji">📜</span>Certifications</h2>
-    <ul>
-      <li>Microsoft Excel — Coursera (2024)</li>
-      <li>Linguaskill — B1 Rank (2023)</li>
-      <li>Soft Skills — NPTEL (2024)</li>
-    </ul>
+<!-- OBJECTIVE -->
+<section id="objective">
+  <div class="reveal">
+    <p class="section-label">// about</p>
+    <h2 class="section-title">Objective</h2>
+    <div class="divider"></div>
+    <div class="card">
+      <p>Aspiring Software Engineer seeking to contribute to innovative software solutions, solve real-world challenges, and grow as a skilled Associate IT Consultant through continuous learning and collaboration.</p>
+    </div>
   </div>
+</section>
 
-  
-<div class="card" style="text-align:left;">
-  <h2><span class="emoji">🎗️</span>Extracurricular</h2>
+<!-- INTERNSHIP -->
+<section id="internship">
+  <div class="reveal">
+    <p class="section-label">// experience</p>
+    <h2 class="section-title">Internship</h2>
+    <div class="divider"></div>
+    <div class="card">
+      <div class="intern-header">
+        <div>
+          <p class="intern-company">CIBIE — Pollachi</p>
+          <p class="intern-title">E-Commerce Intern</p>
+        </div>
+        <span class="badge-date">June – July 2024</span>
+      </div>
+      <ul class="intern-list">
+        <li>Created an intuitive website interface with drag-and-drop customization.</li>
+        <li>Gained hands-on experience with platforms including WordPress and WooCommerce.</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-    <p style="margin:0;line-height:1.6;color:#4b0082;">
-      <strong>Event Coordinator</strong> — Youth Red Cross & Red Ribbon Club
-    </p>
-  
-</div>
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="reveal">
+    <p class="section-label">// work</p>
+    <h2 class="section-title">Projects</h2>
+    <div class="divider"></div>
+    <div class="projects-grid">
 
-  <footer> Parkavi S — Built with 💜 </footer>
+      <div class="proj-card">
+        <span class="proj-num">PROJECT 01</span>
+        <p class="proj-name">Driver Drowsiness Detector System</p>
+        <p class="proj-date">Oct – Nov 2023</p>
+        <ul class="proj-list">
+          <li>Built a real-time monitoring system to detect driver drowsiness and trigger alarms.</li>
+          <li>Aimed at preventing accidents by providing timely notifications to drivers.</li>
+          <li>Implemented facial feature detection and eye movement analysis using OpenCV.</li>
+        </ul>
+        <div class="tech-tags">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">OpenCV</span>
+          <span class="tech-tag">Computer Vision</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <span class="proj-num">PROJECT 02</span>
+        <p class="proj-name">Student Management System</p>
+        <p class="proj-date">Jan – Mar 2025</p>
+        <ul class="proj-list">
+          <li>Developed a CRUD-based application to manage student information efficiently.</li>
+          <li>Implemented features for adding, fetching, updating, and deleting student records using MySQL.</li>
+          <li>Built a user-friendly interface with Java and integrated it with the backend database.</li>
+          <li>Ensured data consistency and validation to maintain accurate student records.</li>
+        </ul>
+        <div class="tech-tags">
+          <span class="tech-tag">Java</span>
+          <span class="tech-tag">MySQL</span>
+          <span class="tech-tag">CRUD</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <span class="proj-num">PROJECT 03</span>
+        <p class="proj-name">AI-Enabled Defence Cyber Incident &amp; Safety Portal</p>
+        <p class="proj-date">Jan – Mar 2026</p>
+        <ul class="proj-list">
+          <li>Developed a secure AI-powered web portal using React, Python, and MongoDB to enable defence personnel, veterans, and their families to report and manage cyber incidents.</li>
+          <li>Integrated AI-based threat analysis to detect phishing attempts, malicious URLs, fraud, and other cyber threats from user-submitted evidence.</li>
+          <li>Implemented role-based access control, incident tracking, and real-time notifications to enhance cyber incident response and streamline case management.</li>
+        </ul>
+        <div class="tech-tags">
+          <span class="tech-tag">React</span>
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">MongoDB</span>
+          <span class="tech-tag">AI/ML</span>
+          <span class="tech-tag">RBAC</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="reveal">
+    <p class="section-label">// capabilities</p>
+    <h2 class="section-title">Skills</h2>
+    <div class="divider"></div>
+    <div class="skills-grid">
+
+      <div class="skill-block">
+        <h3>Technical Skills</h3>
+        <div class="skill-item"><strong>Languages: </strong><span>Java, Python, SQL</span></div>
+        <div class="skill-item"><strong>Frontend: </strong><span>HTML, CSS, React.js</span></div>
+        <div class="skill-item"><strong>Version Control: </strong><span>Git &amp; GitHub</span></div>
+        <div class="skill-item"><strong>Tools &amp; Technologies: </strong><span>MySQL, Excel, PowerBI, GitHub Copilot, Generative AI</span></div>
+        <div class="skill-item"><strong>Methodology: </strong><span>Agile</span></div>
+      </div>
+
+      <div class="skill-block">
+        <h3>Soft Skills</h3>
+        <div class="soft-chips">
+          <span class="chip">Team Work</span>
+          <span class="chip">Accountability</span>
+          <span class="chip">Time Management</span>
+          <span class="chip">Compassion</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="reveal">
+    <p class="section-label">// academic</p>
+    <h2 class="section-title">Education</h2>
+    <div class="divider"></div>
+    <div class="edu-timeline">
+
+      <div class="edu-card">
+        <p class="edu-inst">Dr. Mahalingam College of Engineering and Technology</p>
+        <p class="edu-degree">Bachelor of Technology in AI &amp; Data Science</p>
+        <p class="edu-meta">2022 – 2026 &nbsp;·&nbsp; CGPA: 8.6</p>
+      </div>
+
+      <div class="edu-card">
+        <p class="edu-inst">Swamy Matriculation Higher Secondary School</p>
+        <p class="edu-degree">HSC &amp; SSLC</p>
+        <p class="edu-meta">HSC: 85.1% (2021–2022) &nbsp;·&nbsp; SSLC: 89.8% (2019–2020)</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="reveal">
+    <p class="section-label">// credentials</p>
+    <h2 class="section-title">Certifications</h2>
+    <div class="divider"></div>
+    <div class="cert-list">
+
+      <div class="cert-item">
+        <span class="cert-icon">📊</span>
+        <div>
+          <p class="cert-name">Introduction to Microsoft Excel</p>
+          <p class="cert-meta">Coursera &nbsp;·&nbsp; Jun 2024</p>
+        </div>
+      </div>
+
+      <div class="cert-item">
+        <span class="cert-icon">🌐</span>
+        <div>
+          <p class="cert-name">Linguaskill — Rank B1</p>
+          <p class="cert-meta">Cambridge Assessment &nbsp;·&nbsp; Jan 2023</p>
+        </div>
+      </div>
+
+      <div class="cert-item">
+        <span class="cert-icon">🎓</span>
+        <div>
+          <p class="cert-name">Soft Skills (69%)</p>
+          <p class="cert-meta">NPTEL &nbsp;·&nbsp; Jul – Oct 2024</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXTRA CURRICULAR -->
+<section id="extra">
+  <div class="reveal">
+    <p class="section-label">// beyond code</p>
+    <h2 class="section-title">Extracurricular</h2>
+    <div class="divider"></div>
+    <div class="extra-card">
+      <span class="extra-icon">🎗️</span>
+      <div>
+        <p class="extra-role">Event Coordinator</p>
+        <p class="extra-org">Youth Red Cross and Red Ribbon Club</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Designed &amp; built by <a href="https://github.com/parkavi060" target="_blank" rel="noopener">Parkavi S</a> &nbsp;·&nbsp; Palani, TN &nbsp;·&nbsp;
+    <a href="mailto:parkavisaravanan06@gmail.com">parkavisaravanan06@gmail.com</a></p>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const toggle = document.getElementById('nav-toggle');
+  const navLinks = document.getElementById('nav-links');
+  toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => obs.observe(el));
+</script>
 </body>
 </html>
